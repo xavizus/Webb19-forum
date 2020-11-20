@@ -1,6 +1,15 @@
 # Forum Task
 The task is to implement a simple forum functionality. Any questions regarding the task should be written in the public channel on Slack.
 
+# To run:
+Copy .env.example and rename it to: .env
+Edit the .env and add URL at `NEXT_PUBLIC_API_URL`.
+
+Shell script:
+```shell script
+cp .env.example ./.env && sed -i 's/NEXT_PUBLIC_API_URL=/NEXT_PUBLIC_API_URL=https://lab.willandskill.eu/'
+```
+
 # Requirements
 
 ## Pages
@@ -19,7 +28,7 @@ Use following techs:
 - [ ] Styled Components
 - [x] useState
 - [x] useEffect
-- [] Dynamic routes
+- [ ] Dynamic routes
 - [ ] localStorage (Session Storage)
 
 # Higher grade requirements
@@ -33,19 +42,21 @@ Use following techs:
 # Pages
 ## Register page
 Register page should include a form with the following fields:
-- [ ] email
-- [ ] password
-- [ ] firstname
-- [ ] lastname
-- [ ] country (fetch list of countries from the back-end. See API below)
+- [x] email
+- [x] password
+- [x] firstname
+- [x] lastname
+- [x] country (fetch list of countries from the back-end. See API below)
+
+The form information can be found at: [Line 33 in file formsData](https://github.com/xavizus/Webb19-forum/blob/6e3b023e819a71320f47979215db1386b513de28/components/form/formsData.js#L33)
 
 - [ ] When the user has successfully registered, they should automatically navigate
 to the login page.
 
 ## Login page
 Login page must include:
-- [ ] Email
-- [ ] Password
+- [x] Email
+- [x] Password
 
 - [ ] The form should be able to handle wrong credentials. "Unable to log in with provided credentials."
 - [ ] When the user has successfully registered, they should automatically navigate to the Home Page

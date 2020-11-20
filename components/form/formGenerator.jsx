@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import InputField from "./InputField";
 
-const FormGenerator = ({orderedForm}) => {
+const FormGenerator = ({orderedForm, submitEvent, message}) => {
 
     const [formData, setFormData] = useState({});
 
@@ -19,6 +19,7 @@ const FormGenerator = ({orderedForm}) => {
 
     function onSubmitHandler(event) {
         event.preventDefault();
+        submitEvent(formData);
     }
 
     return (
@@ -30,6 +31,9 @@ const FormGenerator = ({orderedForm}) => {
             })}
 
             <button type={'submit'} onClick={onSubmitHandler}>{orderedForm.submitName}</button>
+            {message &&
+            <p>{message}</p>
+            }
         </form>
     );
 };

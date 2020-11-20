@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {isPromise} from '../../utilities/validators';
 
-const InputField = ({onChangeFunction, value, placeholder, type, name, label, required, isValid, index}) => {
-
-    const [isLoaded, setIsLoaded] = useState(false);
+const InputField = ({onChangeFunction, value, placeholder, type, name, label, required, index}) => {
 
     const [data, setData] = useState(null);
 
@@ -15,7 +13,7 @@ const InputField = ({onChangeFunction, value, placeholder, type, name, label, re
             }
             case 'select': {
                 return (
-                    <select name={name}>
+                    <select name={name} index={index} onChange={onChangeFunction}>
                         {data && data.map((element, index) => {
                             return <option value={element.id} key={index}>{element.title}</option>
                         })}
@@ -28,16 +26,14 @@ const InputField = ({onChangeFunction, value, placeholder, type, name, label, re
     useEffect(async () => {
         if (isPromise(value)) {
             setData(await value);
-            setIsLoaded(true)
         } else {
-            setData(value);
-            setIsLoaded(true);
+            setData(true);
         }
-    },[isLoaded]);
+    },[]);
 
     return (
         <>
-            {isLoaded && (
+            {data && (
                 <>
                     {label && <label htmlFor={name}>{label}</label>}
                     {printInputType()}

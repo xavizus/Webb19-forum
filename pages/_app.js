@@ -1,6 +1,11 @@
-function MyApp({ Component, pageProps }) {
+import CountriesProvider from "../contexts/countries";
 
-  return <Component {...pageProps} />
+function MyApp({ Component, pageProps }) {
+  return (
+      <CountriesProvider>
+        <Component {...pageProps} />
+      </CountriesProvider>
+      )
 }
 
 export default MyApp
