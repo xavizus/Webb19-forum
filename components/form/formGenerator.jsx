@@ -9,13 +9,13 @@ const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
         const elementIndex = event.target.getAttribute('index');
         const {isValid, required, label} = orderedForm.inputFields[elementIndex];
         const {value, name} = event.target;
-        if(typeof isValid === 'function') {
-            const validityMessage = isValid(value) ? '' : 'Invalid data provided';
-            setValidityMessage(validityMessage, event.target)
-        } else if(required) {
-            const validityMessage = value ? '' : `${label} is needed!`;
-            setValidityMessage(validityMessage, event.target);
+        let validityMessage = '';
+        if(typeof isValid === 'function' && !isValid(value)) {
+            validityMessage = 'Invalid data provided';
+        } else if(required && !value) {
+            validityMessage = `${label} is needed!`;
         }
+        setValidityMessage(validityMessage, event.target)
         setValue(name, value);
     }
 
@@ -29,7 +29,7 @@ const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
         setFormData(tempFormData);
     }
 
-    function isSubmitDataValid() {
+    function getInvalidFormData() {
         const filtered = orderedForm.inputFields.filter((currentElement) => {
             if(
                 typeof currentElement.isValid === 'function' &&
@@ -45,15 +45,16 @@ const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
 
         });
         const result = filtered.map(element => element.label);
-        return result.length === 0 ?  true : false ;
+        return result.length !== 0 ?  result : false ;
     }
 
     function onSubmitHandler(event) {
         event.preventDefault();
-        if(!isSubmitDataValid()) {
+        const errorValues = getInvalidFormData();
+        if(errorValues) {
             setMessage({
                 messageType: 'warning',
-                message: `Missing information in the following fields:`
+                message: `Missing information in the following fields: ${errorValues.join(', ')}`
             });
             return;
         }
