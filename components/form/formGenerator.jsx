@@ -1,24 +1,62 @@
 import React, {useState} from 'react';
 import InputField from "./InputField";
 
-const FormGenerator = ({orderedForm, submitEvent, message}) => {
+const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
 
     const [formData, setFormData] = useState({});
 
     function onChangeHandler(event) {
         const elementIndex = event.target.getAttribute('index');
-        const isValid = orderedForm.inputFields[elementIndex].isValid;
+        const {isValid, required, label} = orderedForm.inputFields[elementIndex];
         const {value, name} = event.target;
         if(typeof isValid === 'function') {
-            console.log(isValid(value) ? 'valid' : 'not valid');
+            const validityMessage = isValid(value) ? '' : 'Invalid data provided';
+            setValidityMessage(validityMessage, event.target)
+        } else if(required) {
+            const validityMessage = value ? '' : `${label} is needed!`;
+            setValidityMessage(validityMessage, event.target);
         }
+        setValue(name, value);
+    }
+
+    function setValidityMessage(message, target) {
+        target.setCustomValidity(message);
+    }
+
+    function setValue(name, value) {
         let tempFormData = {...formData};
         tempFormData[name] = value;
         setFormData(tempFormData);
     }
 
+    function isSubmitDataValid() {
+        const filtered = orderedForm.inputFields.filter((currentElement) => {
+            if(
+                typeof currentElement.isValid === 'function' &&
+                currentElement.isValid(formData[currentElement.name])
+            ) {
+                   return false;
+            }
+
+            if(currentElement.required && formData[currentElement.name]) {
+                return false;
+            }
+            return true;
+
+        });
+        const result = filtered.map(element => element.label);
+        return result.length === 0 ?  true : false ;
+    }
+
     function onSubmitHandler(event) {
         event.preventDefault();
+        if(!isSubmitDataValid()) {
+            setMessage({
+                messageType: 'warning',
+                message: `Missing information in the following fields:`
+            });
+            return;
+        }
         submitEvent(formData);
     }
 
@@ -27,12 +65,11 @@ const FormGenerator = ({orderedForm, submitEvent, message}) => {
             {orderedForm.header &&  <h2>{orderedForm.header}</h2>}
             {orderedForm.imageURL && <img src={orderedForm.imageURL}/>}
             {orderedForm && orderedForm.inputFields.map((inputField, index) => {
-                return <InputField {...inputField} onChangeFunction={onChangeHandler} key={index} index={index}/>
+                return <InputField {...inputField} onChangeFunction={onChangeHandler} key={index} index={index} />
             })}
-
             <button type={'submit'} onClick={onSubmitHandler}>{orderedForm.submitName}</button>
             {message &&
-            <p>{message}</p>
+            <p>{message.message}</p>
             }
         </form>
     );

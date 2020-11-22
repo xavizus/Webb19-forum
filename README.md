@@ -21,7 +21,7 @@ cp .env.example ./.env && sed -i 's/NEXT_PUBLIC_API_URL=/NEXT_PUBLIC_API_URL=htt
 - Post Create Page
 - Post Detail Page
 
-# Passed grade requirements:
+# Passing grade requirements:
 Use following techs:
 - [x] React
 - [x] React Components
@@ -29,7 +29,7 @@ Use following techs:
 - [x] useState
 - [x] useEffect
 - [ ] Dynamic routes
-- [ ] localStorage (Session Storage)
+- [x] localStorage (Session Storage)
 
 # Higher grade requirements
 Use following techs:
