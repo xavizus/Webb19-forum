@@ -73,8 +73,13 @@ export function signUpForm() {
                 required: true,
                 value: new Promise(async(resolve, reject) => {
                     try {
+                        if(sessionStorage.getItem('countries')) {
+                            const result = JSON.parse(sessionStorage.getItem('countries'));
+                            return resolve(result);
+                        }
                         const URL = `${process.env.NEXT_PUBLIC_API_URL}${process.env.NEXT_PUBLIC_API_COUNTRY_PATH}`;
                         const response = await fetch(URL).then(response => response.json());
+                        sessionStorage.setItem('countries', JSON.stringify(response.results));
                         resolve(response.results);
                     } catch(error) {
                         reject(error);
