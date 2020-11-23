@@ -15,7 +15,7 @@ const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
         } else if(required && !value) {
             validityMessage = `${label} is needed!`;
         }
-        setValidityMessage(validityMessage, event.target)
+        setValidityMessage(validityMessage, event.target);
         setValue(name, value);
     }
 

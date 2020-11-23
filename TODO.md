@@ -1,2 +1,1 @@
-Use effect is called when form is rerendered and looses all data.
-Find a fix for this.
+- Timer for clearMessage, does not reset when clearMessage is called again.

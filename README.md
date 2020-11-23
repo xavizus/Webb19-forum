@@ -50,7 +50,7 @@ Register page should include a form with the following fields:
 
 The form information can be found at: [Line 33 in file formsData](https://github.com/xavizus/Webb19-forum/blob/6e3b023e819a71320f47979215db1386b513de28/components/form/formsData.js#L33)
 
-- [ ] When the user has successfully registered, they should automatically navigate
+- [x] When the user has successfully registered, they should automatically navigate
 to the login page.
 
 ## Login page
@@ -58,13 +58,13 @@ Login page must include:
 - [x] Email
 - [x] Password
 
-- [ ] The form should be able to handle wrong credentials. "Unable to log in with provided credentials."
-- [ ] When the user has successfully registered, they should automatically navigate to the Home Page
+- [x] The form should be able to handle wrong credentials. "Unable to log in with provided credentials."
+- [x] When the user has successfully logged in, they should automatically navigate to the Home Page
 
 ## Home page
-- [ ] Should some generic text about the forum
-- [ ] Add a link that let the user can navigate to Post List Page
-- [ ] Should show the user account
+- [x] Should have some generic text about the forum
+- [x] Add a link that let the user can navigate to Post List Page
+- [x] Should show the user account
 
 ## Post List Page
 - [ ] List all posts
