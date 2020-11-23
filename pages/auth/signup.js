@@ -3,8 +3,12 @@ import {signUpForm} from "../../components/form/formsData";
 import FormGenerator from "../../components/form/formGenerator";
 import {clearMessage} from "../../utilities/messageHandler";
 import Authentication from '../../classes/userKit';
-import {UserKit} from "../../classes/userStructs";
+import {User} from "../../classes/userStructs";
 import Router from "next/router";
+import {CenteredBoxFrame, CenteredBoxMiddle} from "../../styles/centeredBox";
+import {SignupBoxContent} from "./signup.styles";
+import {Button} from "../../styles/main";
+import Link from "next/link";
 
 const SignUp = () => {
 
@@ -13,7 +17,7 @@ const SignUp = () => {
 
     async function onSubmit(data) {
         try {
-            const userData = new UserKit(data.email, data.password, data.country, data.firstname, data.lastname);
+            const userData = new User(data.email, data.password, data.country, data.firstname, data.lastname);
             const result = await Authentication.createUser(userData);
             if(result.status !== 201) {
                 console.error(result);
@@ -35,9 +39,14 @@ const SignUp = () => {
         }
     }
     return (
-        <div>
-            <FormGenerator orderedForm={form} submitEvent={onSubmit} message={messageData} setMessage={setMessageData}/>
-        </div>
+        <CenteredBoxFrame>
+            <CenteredBoxMiddle>
+                <SignupBoxContent>
+                    <FormGenerator orderedForm={form} submitEvent={onSubmit} message={messageData} setMessage={setMessageData}/>
+                    <Button className={'right'} onClick={() => Router.back()}>Go back</Button>
+                </SignupBoxContent>
+            </CenteredBoxMiddle>
+        </CenteredBoxFrame>
     );
 };
 

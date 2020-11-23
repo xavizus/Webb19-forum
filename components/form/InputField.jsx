@@ -37,10 +37,10 @@ const InputField = ({onChangeFunction, value, placeholder, type, name, label, re
     return (
         <>
             {isLoaded && (
-                <>
+                <div className={'inputGroup'}>
                     {label && <label htmlFor={name}>{label}</label>}
                     {printInputType()}
-                </>
+                </div>
                 )
             }
 

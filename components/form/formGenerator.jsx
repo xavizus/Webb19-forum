@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import InputField from "./InputField";
+import {StyledForm} from "./formGenerator.styles";
+import {Button, InfoBox} from "../../styles/main";
 
 const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
 
@@ -36,15 +38,13 @@ const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
                 currentElement.isValid(formData[currentElement.name])
             ) {
                    return false;
-            }
-
-            if(currentElement.required && formData[currentElement.name]) {
+            } else if(currentElement.required && !currentElement.isValid && formData[currentElement.name]) {
                 return false;
             }
             return true;
 
         });
-        const result = filtered.map(element => element.label);
+        const result = filtered.map(element => `<strong>${element.label}</strong>`);
         return result.length !== 0 ?  result : false ;
     }
 
@@ -61,18 +61,23 @@ const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
         submitEvent(formData);
     }
 
+    /**
+     * Messagebox opens up for vulnerabilities, because it renders raw html. (Though, this is not a concern in this application!).
+     */
     return (
-        <form>
-            {orderedForm.header &&  <h2>{orderedForm.header}</h2>}
+        <StyledForm>
+            {orderedForm.header &&  <h1>{orderedForm.header}</h1>}
             {orderedForm.imageURL && <img src={orderedForm.imageURL}/>}
             {orderedForm && orderedForm.inputFields.map((inputField, index) => {
                 return <InputField {...inputField} onChangeFunction={onChangeHandler} key={index} index={index} />
             })}
-            <button type={'submit'} onClick={onSubmitHandler}>{orderedForm.submitName}</button>
             {message &&
-            <p>{message.message}</p>
+                <InfoBox type={message.messageType}>
+                    <p dangerouslySetInnerHTML={{__html: message.message}}></p>
+                </InfoBox>
             }
-        </form>
+            <Button type={'submit'} className={'left'} onClick={onSubmitHandler}>{orderedForm.submitName}</Button>
+        </StyledForm>
     );
 };
 

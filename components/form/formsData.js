@@ -1,5 +1,5 @@
 import {isEmail, isSecurePassword} from "../../utilities/validators";
-import Authorisation from '../../classes/userKit';
+import PostKit from "../../classes/postKit";
 
 export function loginForm() {
     return {
@@ -21,10 +21,9 @@ export function loginForm() {
                 type: 'password',
                 name: 'password',
                 label: 'Password',
+                required: true,
                 placeholder: 'Your password',
-                isValid: function () {
-                    return true;
-                }
+                isValid: isSecurePassword
             }
         ]
     }
@@ -71,7 +70,7 @@ export function signUpForm() {
                 name: 'country',
                 label: 'Country',
                 required: true,
-                value: Authorisation.getCountries()
+                value: PostKit.getCountries()
             }
         ]
     }

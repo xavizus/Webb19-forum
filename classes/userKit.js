@@ -40,20 +40,6 @@ class UserKit {
         return response;
     }
 
-    getCountries() {
-        return new Promise(async(resolve, reject) => {
-            if(sessionStorage.getItem('countries')) {
-                const result = JSON.parse(sessionStorage.getItem('countries'));
-                return resolve(result);
-            }
-            const countries_URL = `${process.env.NEXT_PUBLIC_API_URL}countries/`;
-            const response = await axios.get(countries_URL,{
-                headers: Headers.getPublicHeaders()
-            });
-            sessionStorage.setItem('countries', JSON.stringify(response.data.results));
-        });
-    }
-
     async createUser(userObject) {
         const createUser_URL = `${process.env.NEXT_PUBLIC_API_URL}auth/users/`;
         if (!userObject instanceof User) {
@@ -74,8 +60,6 @@ class UserKit {
         const token = document.cookie.split('; ')
             .find(row => row.startsWith(process.env.NEXT_PUBLIC_TOKEN_NAME))
             .split('=')[1];
-
-        console.log(token);
         return token;
     }
 
