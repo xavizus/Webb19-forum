@@ -11,7 +11,7 @@ function Home({me}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
         {Object.entries(me).map((value, index) => {
-          return <div>
+          return <div key={index}>
               <div style={{width: "25%", float: 'left'}}>{value[0]}: </div>
               <div style={{width: "50%"}}>{value[1] || 'Null'}</div>
           </div>
@@ -19,7 +19,7 @@ function Home({me}) {
 
         <div>
             <h1>Welcome to Infinity-chan!</h1>
-            <Link href={'/postList'}>Check the forum posts here!</Link>
+            <Link href={'/posts'}>Check the forum posts here!</Link>
         </div>
     </div>
   )

@@ -1,21 +1,9 @@
 import axios from "axios";
 import {User, Credentials} from "./userStructs";
+import Headers from './headers';
+import Cookies from "cookies";
 
 class UserKit {
-
-    getPublicHeaders() {
-        return {
-            "Content-Type": "application/json"
-        }
-    }
-
-    getPrivateHeaders(token=null) {
-        const TOKEN = token ? token : this.getToken();
-        return {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${TOKEN}`
-        }
-    }
 
     checkTokenValidity(token = null) {
         if(!token) {
@@ -47,7 +35,7 @@ class UserKit {
         if(!credentialsObject instanceof Credentials) {
             return false;
         }
-        const response = await axios.post(AUTH_URL, credentialsObject, {headers: this.getPublicHeaders()});
+        const response = await axios.post(AUTH_URL, credentialsObject, {headers: Headers.getPublicHeaders()});
         this.setToken(response.data.token);
         return response;
     }
@@ -60,7 +48,7 @@ class UserKit {
             }
             const countries_URL = `${process.env.NEXT_PUBLIC_API_URL}countries/`;
             const response = await axios.get(countries_URL,{
-                headers: this.getPublicHeaders()
+                headers: Headers.getPublicHeaders()
             });
             sessionStorage.setItem('countries', JSON.stringify(response.data.results));
         });
@@ -74,20 +62,31 @@ class UserKit {
 
         return await axios.post(createUser_URL,
             userObject,
-            {headers: this.getPublicHeaders()});
+            {headers: Headers.getPublicHeaders()});
     }
 
-    async getCurrentUser(token=null) {
+    async getCurrentUser(token) {
         const user_URL = `${process.env.NEXT_PUBLIC_API_URL}me/`;
-        return await axios.get(user_URL, {headers: this.getPrivateHeaders(token)});
+        return await axios.get(user_URL, {headers: Headers.getPrivateHeaders(token)});
     }
 
     getToken() {
-        return localStorage.getItem(process.env.NEXT_PUBLIC_TOKEN_NAME);
+        const token = document.cookie.split('; ')
+            .find(row => row.startsWith(process.env.NEXT_PUBLIC_TOKEN_NAME))
+            .split('=')[1];
+
+        console.log(token);
+        return token;
+    }
+
+    getTokenServerSide(context) {
+        const cookies = new Cookies(context.req, context.res);
+        let token = cookies.get(process.env.NEXT_PUBLIC_TOKEN_NAME);
+
+        return token ? token : 'NotFound';
     }
 
     setToken(token) {
-        localStorage.setItem(process.env.NEXT_PUBLIC_TOKEN_NAME, token);
         const expireDate = new Date();
         const daysBeforeExpire = 2;
         expireDate.setTime(expireDate.getTime() + (daysBeforeExpire*24*60*60*1000));

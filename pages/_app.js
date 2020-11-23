@@ -1,10 +1,10 @@
-import CountriesProvider from "../contexts/countries";
+import PostListProvider from "../contexts/postList";
 
 function MyApp({ Component, pageProps }) {
   return (
-      <CountriesProvider>
+      <PostListProvider>
         <Component {...pageProps} />
-      </CountriesProvider>
+      </PostListProvider>
       )
 }
 

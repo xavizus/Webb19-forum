@@ -23,10 +23,14 @@ function ProtectedRoute(WrappedComponent) {
 
     component.getInitialProps = async (context) => {
         let token = null;
+
+        // Check if serverside
         if(context.res) {
-            const cookies = new Cookies(context.req, context.res);
-            token = cookies.get(process.env.NEXT_PUBLIC_TOKEN_NAME);
-            if(!token) token='NotFound';
+            token = UserKit.getTokenServerSide(context);
+        }
+        // We are clientSide
+        else {
+            token = UserKit.getToken();
         }
 
         if(!UserKit.checkTokenValidity(token)) {
@@ -34,8 +38,14 @@ function ProtectedRoute(WrappedComponent) {
         }
         const response = await UserKit.getCurrentUser(token);
         const me = response.data;
+        console.log(WrappedComponent)
+        if(WrappedComponent.getInitialProps) {
+            const props = await WrappedComponent.getInitialProps({...context, me, token});
+            return {...props, me, token};
+        }
         return {
-            me
+            me,
+            token
         }
     }
     return component;

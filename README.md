@@ -23,18 +23,18 @@ cp .env.example ./.env && sed -i 's/NEXT_PUBLIC_API_URL=/NEXT_PUBLIC_API_URL=htt
 
 # Passing grade requirements:
 Use following techs:
-- [x] React
-- [x] React Components
+- [x] React (Self explained in the code)
+- [x] React Components (See folder components)
 - [ ] Styled Components
 - [x] useState
 - [x] useEffect
-- [ ] Dynamic routes
+- [x] Dynamic routes (SOON TM)
 - [x] localStorage (Session Storage)
 
 # Higher grade requirements
 Use following techs:
 - [ ] Styled Components Inheritance
-- [ ] useContext (or useReducer)
+- [x] useContext (or useReducer)
 - [x] Next.js (optional, but if you use it...)
     - [x] Either getServerSideProps or getStaticProps must be used
     - [ ] Deploy to Vercel
@@ -67,7 +67,7 @@ Login page must include:
 - [x] Should show the user account
 
 ## Post List Page
-- [ ] List all posts
+- [x] List all posts
 - [ ] When the users click on a post they should navigate to the detail page for
       that post
 - [ ] Add link so user can navigate to Post Create Page
