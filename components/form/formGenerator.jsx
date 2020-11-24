@@ -37,7 +37,7 @@ const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
             if(
                 typeof currentElement.isValid === 'function' &&
                 currentElement.isValid(formData[currentElement.name])
-            ) {
+            ) {;
                    return false;
             } else if(currentElement.required && !currentElement.isValid && formData[currentElement.name]) {
                 return false;

@@ -8,6 +8,7 @@ export function isEmail(string) {
 }
 
 export function isSecurePassword(string) {
+    if(string === undefined) return false;
     let regex = ''
     switch(process.env.NEXT_PUBLIC_API_PASSWORD_COMPLEXITY.toLowerCase()) {
         case 'high':
