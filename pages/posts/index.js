@@ -17,8 +17,8 @@ function Index({token}) {
         if(!postListData || !categoryListData) {
             const postList = await PostKit.getPostList(token).then((result) => result.data.results);
             const categories = await PostKit.getCategories();
-            const sortedPostList = sortArrayByDate(postList, 'updatedAt')
-            setPostListData(sortedPostList)
+            const sortedPostList = sortArrayByDate(postList, 'updatedAt');
+            setPostListData(sortedPostList);
             setCategoryListData(categories);
         }
     },[]);

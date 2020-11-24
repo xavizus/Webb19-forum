@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Body} from "./postItem.styles";
 import {clearMessage, formatDate} from "../../utilities/miscellaneous";
 import ReactMarkdown from "react-markdown";
@@ -49,7 +49,6 @@ const PostItem = ({id, author, title, createdAt, updatedAt, content, viewCount, 
         } else if(category) {
             const result = await PostKit.getCategories();
             let categoryItem = result.find(({id}) => id == category);
-            console.log(categoryItem);
             return categoryItem.title;
 
         } else {
@@ -57,9 +56,14 @@ const PostItem = ({id, author, title, createdAt, updatedAt, content, viewCount, 
         }
     }
 
-    useEffect(async () => {
+    useEffect(async () => {;
         if(!responseList) {
-            setResponseList(responses);
+            if(!responses) {
+                let results = await PostKit.getRepliesForPost(id);
+                setResponseList(results.data.results);
+            } else {
+                setResponseList(responses);
+            }
         }
         if(!categoryData) {
             setCategoryData(await getCategory())
@@ -85,7 +89,7 @@ const PostItem = ({id, author, title, createdAt, updatedAt, content, viewCount, 
                 </div>
             </Body>
             {!isClosed && <FormGenerator message={message} setMessage={setMessage} orderedForm={form} submitEvent={onSubmit} />}
-            {countResponses > 0 && <ResponseList responses={responses}/>}
+            {responseList && countResponses > 0 && <ResponseList responses={responseList}/>}
         </>
     );
 };

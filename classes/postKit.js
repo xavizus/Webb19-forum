@@ -17,8 +17,8 @@ export default class PostKit {
         return await axios.get(`${process.env.NEXT_PUBLIC_API_URL}forum/posts/${id}/`,{headers: Headers.getPrivateHeaders(token)});
     }
 
-    static async getRepliesForPost(token, id) {
-        return await axios.get(`${process.env.NEXT_PUBLIC_API_URL}forum/posts/${id}/replies`,{headers: Headers.getPrivateHeaders(token)});
+    static async getRepliesForPost(id) {
+        return await axios.get(`${process.env.NEXT_PUBLIC_API_URL}forum/posts/${id}/replies`,{headers: Headers.getPrivateHeaders(UserKit.getToken())});
     }
 
     static async postPost(postObject) {
@@ -55,7 +55,10 @@ export default class PostKit {
     }
 
     static getData(api_route, key, isPublic=true) {
-        return new Promise(async(resolve) => {
+        return new Promise(async(resolve, reject) => {
+            if(!sessionStorage) {
+                reject('Not supported');
+            }
             if(sessionStorage.getItem(key)) {
                 const result = JSON.parse(sessionStorage.getItem(key));
                 return resolve(result);

@@ -11,7 +11,6 @@ function Home() {
             </Head>
             <div>
                 <h1>Welcome to Infinity-chan!</h1>
-                <Link href={'/posts'}>Check the forum posts here!</Link>
             </div>
         </div>
 

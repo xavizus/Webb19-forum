@@ -28,7 +28,7 @@ Use following techs:
 - [x] Styled Components
 - [x] useState
 - [x] useEffect
-- [x] Dynamic routes (SOON TM)
+- [x] Dynamic routes
 - [x] localStorage (Session Storage)
 
 # Higher grade requirements
