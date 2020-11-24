@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import InputField from "./InputField";
 import {StyledForm} from "./formGenerator.styles";
 import {Button, InfoBox} from "../../styles/main";
+import ReactMarkdown from "react-markdown";
 
 const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
 
@@ -44,7 +45,7 @@ const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
             return true;
 
         });
-        const result = filtered.map(element => `<strong>${element.label}</strong>`);
+        const result = filtered.map(element => `*${element.label}*`);
         return result.length !== 0 ?  result : false ;
     }
 
@@ -61,9 +62,10 @@ const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
         submitEvent(formData);
     }
 
-    /**
-     * Messagebox opens up for vulnerabilities, because it renders raw html. (Though, this is not a concern in this application!).
-     */
+    function getSubmitStyles() {
+        return orderedForm.submitStyle ? orderedForm.submitStyle : 'left';
+    }
+
     return (
         <StyledForm>
             {orderedForm.header &&  <h1>{orderedForm.header}</h1>}
@@ -73,10 +75,10 @@ const FormGenerator = ({orderedForm, submitEvent, message, setMessage}) => {
             })}
             {message &&
                 <InfoBox type={message.messageType}>
-                    <p dangerouslySetInnerHTML={{__html: message.message}}></p>
+                    <ReactMarkdown source={message.message}/>
                 </InfoBox>
             }
-            <Button type={'submit'} className={'left'} onClick={onSubmitHandler}>{orderedForm.submitName}</Button>
+            <Button type={'submit'} className={getSubmitStyles()} onClick={onSubmitHandler}>{orderedForm.submitName}</Button>
         </StyledForm>
     );
 };

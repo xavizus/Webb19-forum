@@ -14,3 +14,19 @@ export class Credentials {
         this.password = password;
     }
 }
+
+export class Reply {
+    constructor(title, content, parentId) {
+        this.title = title;
+        this.content = content;
+        this.parent = parentId;
+    }
+}
+
+export class Post {
+    constructor(title, content, category) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+    }
+}

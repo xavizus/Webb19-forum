@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
+  margin: 10px;
   h1 {
     text-align: center;
     margin-bottom: 2rem;

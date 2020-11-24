@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Router from 'next/router';
 import UserKit from '../classes/userKit';
-import Cookies from 'cookies';
 
 function redirect(ctx) {
     if(ctx.res) {
@@ -36,16 +35,14 @@ function ProtectedRoute(WrappedComponent) {
         if(!UserKit.checkTokenValidity(token)) {
             redirect(context);
         }
-        const response = await UserKit.getCurrentUser(token);
-        const me = response.data;
-        console.log(WrappedComponent)
+
         if(WrappedComponent.getInitialProps) {
-            const props = await WrappedComponent.getInitialProps({...context, me, token});
-            return {...props, me, token};
+            const props = await WrappedComponent.getInitialProps({...context,  token, auth: true});
+            return {...props, token, auth: true};
         }
         return {
-            me,
-            token
+            token,
+            auth: true
         }
     }
     return component;

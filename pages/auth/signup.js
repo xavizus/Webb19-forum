@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 import {signUpForm} from "../../components/form/formsData";
 import FormGenerator from "../../components/form/formGenerator";
-import {clearMessage} from "../../utilities/messageHandler";
+import {clearMessage} from "../../utilities/miscellaneous";
 import Authentication from '../../classes/userKit';
-import {User} from "../../classes/userStructs";
+import {User} from "../../classes/structs";
 import Router from "next/router";
 import {CenteredBoxFrame, CenteredBoxMiddle} from "../../styles/centeredBox";
 import {SignupBoxContent} from "./signup.styles";
 import {Button} from "../../styles/main";
-import Link from "next/link";
 
 const SignUp = () => {
 

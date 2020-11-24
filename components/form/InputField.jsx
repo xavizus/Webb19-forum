@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {isPromise} from '../../utilities/validators';
 
-const InputField = ({onChangeFunction, value, placeholder, type, name, label, required, index, setValue}) => {
+const InputField = ({onChangeFunction, value, placeholder, type, name, label, required, index, setValue, hideLabel}) => {
 
     const [data, setData] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -22,6 +22,13 @@ const InputField = ({onChangeFunction, value, placeholder, type, name, label, re
                     </select>
                 )
             }
+            case 'textarea': {
+                return (
+                    <textarea name={name} index={index} onChange={onChangeFunction} placeholder={placeholder}>
+
+                    </textarea>
+                )
+            }
         };
     }
 
@@ -38,7 +45,7 @@ const InputField = ({onChangeFunction, value, placeholder, type, name, label, re
         <>
             {isLoaded && (
                 <div className={'inputGroup'}>
-                    {label && <label htmlFor={name}>{label}</label>}
+                    {label && !hideLabel && <label htmlFor={name}>{label}</label>}
                     {printInputType()}
                 </div>
                 )

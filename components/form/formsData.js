@@ -29,6 +29,63 @@ export function loginForm() {
     }
 }
 
+export function postForm() {
+    return {
+        submitName: 'Submit',
+        submitStyle: 'None',
+        header: 'Create your own post',
+        inputFields: [
+            {
+                type: 'text',
+                name: 'title',
+                label: 'Title',
+                required: true,
+                placeholder: 'Enter a title'
+            },
+            {
+                type: 'textarea',
+                name: 'content',
+                label: 'Content',
+                hideLabel: true,
+                required: true,
+                placeholder: 'Enter your reply'
+            },
+            {
+                type: 'select',
+                name: 'category',
+                label: 'Category',
+                required: true,
+                value: PostKit.getCategories()
+            }
+        ]
+    }
+}
+
+export function replyForm() {
+    return {
+        submitName: 'Submit',
+        submitStyle: 'None',
+        header: 'Enter your reply',
+        inputFields: [
+            {
+                type: 'text',
+                name: 'title',
+                label: 'Title',
+                required: true,
+                placeholder: 'Enter a title'
+            },
+            {
+                type: 'textarea',
+                name: 'content',
+                label: 'Content',
+                hideLabel: true,
+                required: true,
+                placeholder: 'Enter your reply'
+            }
+        ]
+    }
+}
+
 export function signUpForm() {
     return {
         submitName: 'Submit',

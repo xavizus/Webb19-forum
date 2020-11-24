@@ -1,5 +1,5 @@
 import axios from "axios";
-import {User, Credentials} from "./userStructs";
+import {User, Credentials} from "./structs";
 import Headers from './headers';
 import Cookies from "cookies";
 
@@ -24,7 +24,7 @@ class UserKit {
         if(!string) {
             return;
         }
-        const buffer = new Buffer(string, "base64");
+        const buffer = Buffer.from(string, "base64");
         return buffer.toString('ascii');
     }
 

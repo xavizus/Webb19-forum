@@ -1,13 +1,26 @@
 import React from 'react';
 import PostListItem from "./postListItem";
+import {StyledTable} from "./postList.styles";
 
 const PostList = ({data}) => {
+
     return (
-        <div>
-            {data && data.map((listItem, index) => {
+        <StyledTable>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Replies</th>
+                <th>Last update</th>
+            </tr>
+            </thead>
+            <tbody>
+            {data.map((listItem, index) => {
                 return <PostListItem key={index} {...listItem}/>
             })}
-        </div>
+
+            </tbody>
+        </StyledTable>
     );
 };
 

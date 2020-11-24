@@ -25,7 +25,7 @@ cp .env.example ./.env && sed -i 's/NEXT_PUBLIC_API_URL=/NEXT_PUBLIC_API_URL=htt
 Use following techs:
 - [x] React (Self explained in the code)
 - [x] React Components (See folder components)
-- [ ] Styled Components
+- [x] Styled Components
 - [x] useState
 - [x] useEffect
 - [x] Dynamic routes (SOON TM)
@@ -33,7 +33,7 @@ Use following techs:
 
 # Higher grade requirements
 Use following techs:
-- [ ] Styled Components Inheritance
+- [x] Styled Components Inheritance
 - [x] useContext (or useReducer)
 - [x] Next.js (optional, but if you use it...)
     - [x] Either getServerSideProps or getStaticProps must be used
@@ -68,22 +68,22 @@ Login page must include:
 
 ## Post List Page
 - [x] List all posts
-- [ ] When the users click on a post they should navigate to the detail page for
+- [x] When the users click on a post they should navigate to the detail page for
       that post
-- [ ] Add link so user can navigate to Post Create Page
+- [x] Add link so user can navigate to Post Create Page
 
 ## Post Create Page
-- [ ] This page should render a form where the user can create a new Post.
+- [x] This page should render a form where the user can create a new Post.
 The form should contain:
-- [ ] title
-- [ ] content
-- [ ] category (Please see API below for list of all categories)
+- [x] title
+- [x] content
+- [x] category (Please see API below for list of all categories)
 
-- [ ] When a post created successfully, the user should automatically navigate to
+- [x] When a post created successfully, the user should automatically navigate to
       the Post List Page
       
 ## Post Detail Page
-- [ ] This page should render all of the data that is returned from the API for Post Detail.
-- [ ] A link to navigate to all posts should be present.
-- [ ] (VG Option) Add possibility to add a response
+- [x] This page should render all of the data that is returned from the API for Post Detail.
+- [x] A link to navigate to all posts should be present.
+- [x] (VG Option) Add possibility to add a response
 

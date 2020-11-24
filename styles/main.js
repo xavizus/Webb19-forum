@@ -39,12 +39,18 @@ export const colorPalette = {
     }
 }
 
+export const StyledContent = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 600px;
+  margin: auto;
+`;
 
 export const StyledBackground = styled.div`
   background-color: ${props => props.theme.primary};
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   color: ${props => props.theme.font};
-
    a:link {
      color: ${props => props.theme.link}; 
      text-decoration: none;
@@ -74,6 +80,10 @@ export const StyledBackground = styled.div`
     .left {
       float: left;
     }
+    
+    .center {
+      text-align: center;
+    }
 `;
 
 export const InfoBox = styled.div`
@@ -91,7 +101,7 @@ padding: 12px 20px;
         border-color: ${alertColors.borderColor};
         `
 }};
-    b, strong {
+    b, strong, em {
       font-weight: bolder;
     }
 `
