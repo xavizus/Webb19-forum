@@ -5,7 +5,7 @@ import {PostListContext} from "../../contexts/postList";
 import PostList from "../../components/posts/postList";
 import {CategoriesContext} from "../../contexts/categories";
 import {sortArrayByDate} from "../../utilities/miscellaneous";
-import {PostListGrid} from "./posts.styled";
+import {PostListGrid} from "../../styles/posts.styled";
 
 
 function Index({token}) {

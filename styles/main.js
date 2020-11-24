@@ -44,6 +44,10 @@ export const StyledContent = styled.div`
   justify-content: center;
   width: 600px;
   margin: auto;
+  .material-icons{
+    vertical-align: bottom;
+    font-size: 18px !important;
+}
 `;
 
 export const StyledBackground = styled.div`
@@ -51,6 +55,7 @@ export const StyledBackground = styled.div`
   height: 100%;
   min-height: 100vh;
   color: ${props => props.theme.font};
+  font-size: 1rem;
    a:link {
      color: ${props => props.theme.link}; 
      text-decoration: none;

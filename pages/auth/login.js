@@ -6,7 +6,7 @@ import {Credentials} from "../../classes/structs";
 import UserKit from "../../classes/userKit";
 import {clearMessage} from "../../utilities/miscellaneous";
 import Router from "next/router";
-import {LoginBoxContent} from "./login.styles";
+import {LoginBoxContent} from "../../styles/login.styles";
 import {CenteredBoxFrame, CenteredBoxMiddle} from "../../styles/centeredBox";
 import {Button} from "../../styles/main";
 

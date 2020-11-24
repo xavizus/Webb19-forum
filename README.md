@@ -37,7 +37,7 @@ Use following techs:
 - [x] useContext (or useReducer)
 - [x] Next.js (optional, but if you use it...)
     - [x] Either getServerSideProps or getStaticProps must be used
-    - [ ] Deploy to Vercel
+    - [x] Deploy to Vercel
     
 # Pages
 ## Register page

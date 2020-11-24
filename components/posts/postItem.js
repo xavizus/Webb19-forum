@@ -8,11 +8,12 @@ import ResponseList from "./responseList";
 import PostKit from "../../classes/postKit";
 import {Reply} from "../../classes/structs";
 
-const PostItem = ({id, author, title, createdAt, updatedAt, content, viewCount, countResponses, category, isPinned, isClosed, userSubscribed, responses}) => {
+const PostItem = ({id, author, title, createdAt, updatedAt, content, viewCount, countResponses, category, isPinned, isClosed, userSubscribed, responses, country}) => {
 
     const [message, setMessage] = useState(null);
     const [responseList, setResponseList] = useState(null);
     const [categoryData, setCategoryData] = useState(null);
+    const [countryData, setCountryData] = useState(null);
     const form = replyForm();
 
     function getFirstCharacterOfString(string) {
@@ -56,7 +57,17 @@ const PostItem = ({id, author, title, createdAt, updatedAt, content, viewCount, 
         }
     }
 
-    useEffect(async () => {;
+    async function getCountry() {
+       if(category) {
+            const result = await PostKit.getCountries();
+            let categoryItem = result.find(({id}) => id == country);
+            return categoryItem.title;
+        } else {
+            return '';
+        }
+    }
+
+    useEffect(async () => {
         if(!responseList) {
             if(!responses) {
                 let results = await PostKit.getRepliesForPost(id);
@@ -66,7 +77,10 @@ const PostItem = ({id, author, title, createdAt, updatedAt, content, viewCount, 
             }
         }
         if(!categoryData) {
-            setCategoryData(await getCategory())
+            setCategoryData(await getCategory());
+        }
+        if(!countryData){
+            setCountryData(await getCountry());
         }
     },[])
 
@@ -79,13 +93,13 @@ const PostItem = ({id, author, title, createdAt, updatedAt, content, viewCount, 
                 </div>
                 <div className="header">
                     <div className="title">{title}</div>
-                    <div className="postDetails">Posted by <span className={'important'}>{author.firstName} {author.lastName}</span> on {formatDate(createdAt)}, updated at {formatDate(updatedAt)}</div>
+                    <div className="postDetails">Posted by <span className={'important'}>{author.firstName} {author.lastName}</span> on {formatDate(createdAt)}, updated at {formatDate(updatedAt)} from {countryData}</div>
                 </div>
                 <div className="content">
                     <ReactMarkdown source={content}/>
                 </div>
                 <div className="postInfo">
-                    Views: {viewCount}  Comments: {countResponses} Category: {categoryData && <>{categoryData}</>} {isPinned && <i className="material-icons">push_pin</i>} {isClosed && <i className="material-icons">block</i> }
+                    <i className="material-icons">visibility</i> {viewCount}  <i className="material-icons">mode_comment</i> {countResponses} {categoryData && <span className={'category'}>{categoryData}</span>} {isPinned && <i className="material-icons">push_pin</i>} {isClosed && <i className="material-icons">block</i> }
                 </div>
             </Body>
             {!isClosed && <FormGenerator message={message} setMessage={setMessage} orderedForm={form} submitEvent={onSubmit} />}

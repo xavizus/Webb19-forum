@@ -27,7 +27,7 @@ const CreatePost = () => {
             setTimeout(() => {
                 setPostListData(null);
                 Router.push('/posts');
-            }, 2*1000)
+            }, 2*1000);
         } catch(error) {
             setMessage({message: error.message, messageType: 'error'});
         }

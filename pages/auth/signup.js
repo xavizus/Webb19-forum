@@ -6,7 +6,7 @@ import Authentication from '../../classes/userKit';
 import {User} from "../../classes/structs";
 import Router from "next/router";
 import {CenteredBoxFrame, CenteredBoxMiddle} from "../../styles/centeredBox";
-import {SignupBoxContent} from "./signup.styles";
+import {SignupBoxContent} from "../../styles/signup.styles";
 import {Button} from "../../styles/main";
 
 const SignUp = () => {
@@ -19,7 +19,6 @@ const SignUp = () => {
             const userData = new User(data.email, data.password, data.country, data.firstname, data.lastname);
             const result = await Authentication.createUser(userData);
             if(result.status !== 201) {
-                console.error(result);
                 throw new Error('Something went terrible wrong!');
             }
             setMessageData({message: 'Successfully created account! You will be redirected in 5 seconds', messageType: 'info'});

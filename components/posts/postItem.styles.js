@@ -59,6 +59,14 @@ export const Body = styled.div`
   
   .postInfo {
     grid-area: postInfo;
+    background-color: ${props => props.theme.something};
+    border-radius: 4px;
+    padding: 9px 5px 2px 5px;
+    height: 100%;
   }
-  
+  .category {
+    border-radius: 4px;
+    background-color: ${props => props.theme.primary};
+    padding: 8px;
+  }
 `;

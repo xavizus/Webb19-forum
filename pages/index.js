@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import ProtectedRoute from "../components/protectedRoute";
-import Link from "next/link";
+import {HomeCenteredBox, P} from "../styles/home.styled";
 
 function Home() {
 
@@ -9,9 +9,10 @@ function Home() {
             <Head>
                 <title>Webb19 Forum</title>
             </Head>
-            <div>
-                <h1>Welcome to Infinity-chan!</h1>
-            </div>
+                <HomeCenteredBox>
+                    <h1>Welcome to Infinity-chan. Speak freely - legally.!</h1>
+                    <P>On Infinity-chan, you can create your own post for free with no experience or programming knowledge needed.</P>
+                </HomeCenteredBox>
         </div>
 
 )

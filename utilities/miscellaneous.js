@@ -24,7 +24,7 @@ export function clearMessage(setFunction, timeBeforeClearInSeconds = 10) {
 
 
 function addLeadingZeroIfThereIsOnlyOneCharacter(string) {
-    return (string.length === 1) ? `0${string}` : string;
+    return (string.toString().length === 1) ? `0${string}` : string;
 }
 
 export function getAmountAgoFromDate(date) {
@@ -46,11 +46,10 @@ export function getAmountAgoFromDate(date) {
     } else {
         diffString = `${Math.ceil(diffTime / amount.year)} years`;
     }
-
     return diffString+' ago';
 }
 
-export function formatDate(date, format='yyyy-mm-dd HH:ss') {
+export function formatDate(date, format='yyyy-mm-dd HH:MM') {
     date = new Date(date);
     const formatConversion = {
         'YY': date.getFullYear().toString().substr(2,4),

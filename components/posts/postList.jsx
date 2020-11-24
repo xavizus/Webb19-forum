@@ -1,6 +1,6 @@
 import React from 'react';
 import PostListItem from "./postListItem";
-import {StyledTable} from "./postList.styles";
+import {StyledTable} from "../../styles/postList.styles";
 
 const PostList = ({data}) => {
 
